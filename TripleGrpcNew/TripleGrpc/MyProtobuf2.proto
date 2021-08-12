@@ -1,0 +1,55 @@
+syntax = "proto3";
+option go_package = "/;TripleGrpc";
+package TripleGrpc;
+
+// GetTriple服务，定义RPC服务并具有一个方法，该方法接收GetTripleRequest，并返回一个TripleList,在.proto文件中进行如下定义：
+service GetTriple {
+  rpc GetIntTriple(GetTripleRequest) returns (TripleList) {}
+  rpc GetBitTriple(GetTripleRequest) returns (BitTripleList) {}
+  rpc GetBytesTriple(GetBytesTripleRequest) returns (BytesTripleList) {}
+}
+
+message GetTripleRequest {
+  int32 Group=1;
+  int32 Role=2;
+  int32 Nlen=3;
+}
+
+message GetBytesTripleRequest {
+  int32 Group = 1;
+  int32 Role = 2;
+  int32 Length=3;
+  int32 Nlen = 4;
+ 
+}
+message Triple{
+    int64 A= 1;
+    int64 B =2;
+    int64 C =3;
+}
+message BitTriple {
+  uint32 A = 1;
+  uint32 B = 2;
+  uint32 C = 3;
+
+}
+
+message BytesTrile{
+    bytes A =1;
+    bytes B =2;
+    bytes C= 3;
+}
+
+// Request message for getting a TripleList
+message TripleList
+  {
+   repeated Triple triple=1;
+  }
+message BitTripleList 
+  {
+ repeated BitTriple bittriple = 1; 
+    }
+message BytesTripleList 
+    { 
+    repeated BytesTrile ByteTriple = 1; 
+   }
